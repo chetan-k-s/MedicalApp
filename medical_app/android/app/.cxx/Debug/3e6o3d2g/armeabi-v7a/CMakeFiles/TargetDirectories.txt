@@ -1,0 +1,2 @@
+D:/MedicalApp/medical_app/android/app/.cxx/Debug/3e6o3d2g/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/MedicalApp/medical_app/android/app/.cxx/Debug/3e6o3d2g/armeabi-v7a/CMakeFiles/rebuild_cache.dir

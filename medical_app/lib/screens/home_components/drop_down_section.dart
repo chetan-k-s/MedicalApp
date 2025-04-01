@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:medical_app/screens/prescription.dart';
 
 class DropDownSection extends StatefulWidget {
   const DropDownSection({
@@ -26,7 +27,9 @@ class _DropDownSectionState extends State<DropDownSection> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () => {},
+                    onTap: () => {
+                      Navigator.push(context, Prescription.route())
+                    },
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       child: const Column(
@@ -149,13 +152,13 @@ class _DropDownSectionState extends State<DropDownSection> {
                       padding: const EdgeInsets.all(8),
                       child: const Column(
                         children: [
-                          Icon(
-                            Icons.post_add,
+                          FaIcon(
+                            FontAwesomeIcons.pills,
                             size: 40,
                           ),
                           SizedBox(height: 4),
                           Text(
-                            'Prescription\n     Order',
+                            '      My\nMedicines',
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
@@ -176,12 +179,12 @@ class _DropDownSectionState extends State<DropDownSection> {
                       child: const Column(
                         children: [
                           FaIcon(
-                            FontAwesomeIcons.hospital,
+                            FontAwesomeIcons.heartPulse,
                             size: 40,
                           ),
                           SizedBox(height: 4),
                           Text(
-                            '  Visit \nHospital',
+                            ' Manage\nDiabetics',
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
@@ -202,23 +205,15 @@ class _DropDownSectionState extends State<DropDownSection> {
                       child: const Column(
                         children: [
                           FaIcon(
-                            FontAwesomeIcons.phone,
+                            FontAwesomeIcons.temperatureThreeQuarters,
                             size: 40,
                           ),
                           SizedBox(height: 4),
                           Text(
-                            'Doctor\nOn Call',
+                            'Diabetics\n reversal',
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            'FREE',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w800,
-                              color: Color.fromARGB(255, 9, 20, 239),
                             ),
                           ),
                         ],
@@ -236,12 +231,12 @@ class _DropDownSectionState extends State<DropDownSection> {
                       child: const Column(
                         children: [
                           Icon(
-                            Icons.check,
+                            Icons.more_horiz_rounded,
                             size: 40,
                           ),
                           SizedBox(height: 4),
                           Text(
-                            '    Check\n Symptoms',
+                            'View all',
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,

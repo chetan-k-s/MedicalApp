@@ -1,13 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:medical_app/screens/medicines_and_essentials.dart';
+import 'package:medical_app/navigation_bar.dart';
 import 'package:medical_app/screens/home_components/drop_down_section.dart';
 import 'package:medical_app/screens/home_components/popular_categories.dart';
+import 'package:medical_app/screens/my_profile.dart';
+//import 'package:medical_app/screens/medicines.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
+
+  static route() => MaterialPageRoute(builder: (context) => const Home());
 }
 
 class _HomeState extends State<Home> {
@@ -16,6 +23,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: _buildAppBar(),
+      drawer: _buildDrawer(),
       body: _buildBody(),
     );
   }
@@ -30,7 +38,9 @@ class _HomeState extends State<Home> {
             runSpacing: 10,
             children: <Widget>[
               GestureDetector(
-                onTap: () => {},
+                onTap: () => {
+                  Navigator.push(context, MedicinesAndEssentials.route())
+                },
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
@@ -67,7 +77,9 @@ class _HomeState extends State<Home> {
                 ),
               ),
               GestureDetector(
-                onTap: () => {},
+                onTap: () => {
+                  Navigator.of(context).push(NavBar.route(initialIndex: 1))
+                },
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
@@ -104,7 +116,9 @@ class _HomeState extends State<Home> {
                 ),
               ),
               GestureDetector(
-                onTap: () => {},
+                onTap: () => {
+                  Navigator.of(context).push(NavBar.route(initialIndex: 3))
+                },
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
@@ -201,7 +215,8 @@ class _HomeState extends State<Home> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () => {},
+                    onTap: () => {
+                    },
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       child: const Column(
@@ -293,7 +308,8 @@ class _HomeState extends State<Home> {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () => {},
+                    onTap: () => {
+                    },
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       child: const Column(
@@ -379,7 +395,20 @@ class _HomeState extends State<Home> {
             ],
           ),
           const SizedBox(height: 20),
-          //const PopularCategories(),
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Popular Categories',
+              style:TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold
+              ),
+              textDirection: TextDirection.ltr,
+              textAlign: TextAlign.left,
+            ),
+          ),
+          const SizedBox(height:20),
+          const PopularCategories(),
         ],
       ),
     );
@@ -387,12 +416,12 @@ class _HomeState extends State<Home> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.teal[900],
       elevation: 0,
       toolbarHeight: 100,
       leading: const Icon(
         Icons.menu,
-        color: Colors.black,
+        color: Colors.white,
       ),
       title: dropDown(), 
       actions: <Widget>[
@@ -401,70 +430,72 @@ class _HomeState extends State<Home> {
             label: Text('3'),
             child: Icon(Icons.notifications_outlined),
           ),
-          color: Colors.black,
+          color: Colors.white,
           onPressed: () => {},
         ),
         //const SizedBox(width: 7,),
         IconButton(
           icon: const Icon(Icons.wallet_outlined),
-          color: Colors.black,
+          color: Colors.white,
           onPressed: () => {},
         ),
         //const SizedBox(width: 7,),
         IconButton(
           icon: const Icon(Icons.person_outline),
-          color: Colors.black,
-          onPressed: () => {},
+          color: Colors.white,
+          onPressed: () {
+            Navigator.push(context, MyProfile.route());
+          },
         )
       ],
       bottom: _searchBox(),
     );
   }
 
-  PreferredSize _searchBox() {
-    return PreferredSize(
-      preferredSize: const Size.fromHeight(10),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-        child: Row(
-          children: [
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.green[50],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const TextField(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(10),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      size: 20,
-                    ),
-                    border: InputBorder.none,
-                    hintText: 'Search',
-                    hintStyle: TextStyle(color: Colors.grey),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 10),
-            Container(
+PreferredSize _searchBox() {
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(10),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
               decoration: BoxDecoration(
                 color: Colors.green[50],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: IconButton(
-                icon: const Icon(Icons.shopping_cart),
-                color: Colors.black,
-                onPressed: () {},
+              child: const TextField(
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(10),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    size: 20,
+                  ),
+                  border: InputBorder.none,
+                  hintText: 'Search',
+                  hintStyle: TextStyle(color: Colors.grey),
+                ),
+              ),
             ),
-            )
-          ],
-        ),
+          ),
+          const SizedBox(width: 10),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.green[50],
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.shopping_cart),
+              color: Colors.black,
+              onPressed: () {},
+          ),
+          )
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget dropDown(){
     return Row(
@@ -476,7 +507,7 @@ class _HomeState extends State<Home> {
               Text(
                 'Hi Guest',
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -485,12 +516,45 @@ class _HomeState extends State<Home> {
               Icon(
                 Icons.keyboard_arrow_down,
                 size: 18,
-                color: Colors.black,
+                color: Colors.white,
               ),
             ],
           ),
         )
       ],
+    );
+  }
+
+  Widget _buildDrawer() {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          SizedBox(
+            height: 150,
+            child: DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.indigo[900],
+              ),
+              child: const Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('Logout'),
+            onTap: () {
+              Navigator.pop(context);
+              FirebaseAuth.instance.signOut();
+            },
+          ),
+        ],
+      ),
     );
   }
 }

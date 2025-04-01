@@ -1,0 +1,2 @@
+Very important
+Phone number verification supports only 10 sms/day, so to increase this a billing account is needed

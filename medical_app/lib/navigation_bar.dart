@@ -7,14 +7,26 @@ import 'package:medical_app/screens/medicines.dart';
 import 'package:medical_app/screens/my_health.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+  final int initialIndex;
+  const NavBar({super.key, this.initialIndex = 0});
 
   @override
   State<NavBar> createState() => _NavBarState();
+
+  static route({int initialIndex = 0}) => MaterialPageRoute(
+        builder: (context) => NavBar(initialIndex: initialIndex),
+      );
 }
 
 class _NavBarState extends State<NavBar> {
-  int currentIndex = 0;
+  late int currentIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = widget.initialIndex;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,11 +51,11 @@ class _NavBarState extends State<NavBar> {
           ),
           NavigationDestination(
             icon: FaIcon(FontAwesomeIcons.pills),
-            label:'Medicines' 
+            label: 'Medicines',
           ),
           NavigationDestination(
             icon: FaIcon(FontAwesomeIcons.houseMedical),
-            label:'Lab Tests' 
+            label: 'Lab Tests',
           ),
           NavigationDestination(
             icon: FaIcon(FontAwesomeIcons.kitMedical),
@@ -57,7 +69,7 @@ class _NavBarState extends State<NavBar> {
         const Medicines(),
         const LabTests(),
         const MyHealth(),
-      ][currentIndex]
+      ][currentIndex],
     );
   }
 }
